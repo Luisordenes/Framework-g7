@@ -74,7 +74,22 @@ class SucursalesController extends Controller
         ]);
     }
 
+    public function mensajeSucursal($id){
+        $sucursal = Sucursal::where('id', $id)->get();
+
+        return view('/Sucursal/mensaje-sucursal',[
+            'sucursal' => $sucursal,
+        ]);
+    }
+
     public function eliminarSucursal($id){
+        $stocks = Stock::get();
+        foreach($stocks as $stock){
+            if($stock->sucursal_id == $id){
+                $stock = Stock::findOrFail($stock->id);
+                $stock->delete();
+            }
+        }
         $sucursal = Sucursal::findOrFail($id);
         $sucursal->delete();
 

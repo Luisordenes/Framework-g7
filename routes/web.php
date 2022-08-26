@@ -23,6 +23,7 @@ Route::get('/producto/listar', 'ProductosController@listarProducto');
 Route::get('/producto/consultar/{dato}', 'ProductosController@consultarProducto');
 Route::get('/producto/editar/{id}', 'ProductosController@editarProducto');
 Route::post('/producto/regrabar/{id}', 'ProductosController@regrabarProducto');
+Route::get('/producto/mensaje/{id}', 'ProductosController@mensajeProducto');
 Route::get('/producto/eliminar/{id}', 'ProductosController@eliminarProducto');
 Route::get('/producto/stock/{id}', 'ProductosController@stockProducto');
 
@@ -33,6 +34,7 @@ Route::post('/categoria/grabar', 'CategoriasController@grabarCategoria');
 Route::get('/categoria/listar', 'CategoriasController@listarCategoria');
 Route::get('/categoria/editar/{id}', 'CategoriasController@editarCategoria');
 Route::post('/categoria/regrabar/{id}', 'CategoriasController@regrabarCategoria');
+Route::get('/categoria/mensaje/{id}', 'CategoriasController@mensajeCategoria');
 Route::get('/categoria/eliminar/{id}', 'CategoriasController@eliminarCategoria');
 Route::get('/categoria/stock/{id}', 'CategoriasController@stockCategoria');
 
@@ -41,6 +43,7 @@ Route::post('/sucursal/grabar', 'SucursalesController@grabarSucursal');
 Route::get('/sucursal/listar', 'SucursalesController@listarSucursal');
 Route::get('/sucursal/editar/{id}', 'SucursalesController@editarSucursal');
 Route::post('/sucursal/regrabar/{id}', 'SucursalesController@regrabarSucursal');
+Route::get('/sucursal/mensaje/{id}', 'SucursalesController@mensajeSucursal');
 Route::get('/sucursal/eliminar/{id}', 'SucursalesController@eliminarSucursal');
 Route::get('/sucursal/stock/{id}', 'SucursalesController@stockSucursal');
 
@@ -56,3 +59,7 @@ Route::get('/stock/eliminar/{id}', 'StockController@eliminarStock');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

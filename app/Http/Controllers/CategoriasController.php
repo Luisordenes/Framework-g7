@@ -65,7 +65,29 @@ class CategoriasController extends Controller
         ]);
     }
 
+    public function mensajeCategoria($id){
+        $categoria = Categoria::where('id', $id)->get();
+
+        return view('/Categoria/mensaje-categoria',[
+            'categoria' => $categoria,
+        ]);
+    }
+
     public function eliminarCategoria($id){
+        $productos = Producto::get();
+        $stocks = Stock::get();
+        foreach($productos as $producto){
+            if($producto->categoria_id == $id){
+                foreach($stocks as $stock){
+                    if($producto->id == $stock->producto_id){
+                        $stock = Stock::findOrFail($stock->id);
+                        $stock->delete();
+                    }
+                }
+                $producto = Producto::findOrFail($producto->id);
+                $producto->delete();
+            }
+        }
         $categoria = Categoria::findOrFail($id);
         $categoria->delete();
 

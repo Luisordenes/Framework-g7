@@ -37,23 +37,66 @@
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
-              <button class="btn btn-outline-success" onclick="location.href='/producto/consultar/'+ document.getElementById('search').value;" type="button">Search</button>
+              <button class="btn btn-outline-success" onkeyup="location.href='/producto/consultar/'+ document.getElementById('search').value;" onclick="location.href='/producto/consultar/'+ document.getElementById('search').value;" type="button">Search</button>
             </form>
           </div>
         </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+          </div>
+
       </nav>
-        
-      <div>
-      @section('header')
-        <div class="container">
-          <hr>
-          <h2>Pagina principal</h2>
-        </div>
+    <div>
+
+        @section('header')
+          <div class="container">
+            <hr>
+            <h2>Pagina principal</h2>
+            <br>
+            <br>
+          </div>
       
-      @show
+        @show
 
 
-      @yield('content')
+        @yield('content')
       </div>
 
       @section('footer')

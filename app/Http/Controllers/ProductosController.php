@@ -92,7 +92,6 @@ class ProductosController extends Controller
             'nombre' => 'required',
             'codigo' => 'required',
             'descripcion' => 'required',
-            'image' => 'required',
             'categoria' => 'required'
         ]);
 
@@ -101,15 +100,21 @@ class ProductosController extends Controller
         if($imagen){
             $imagen_path = time()."-".$imagen->getClientOriginalName();
             \Storage::disk('imagenes')->put($imagen_path, \File::get($imagen));
+            $producto = Producto::findOrFail($id);
+            $producto->nombre = $request->nombre;
+            $producto->codigo = $request->codigo;
+            $producto->descripcion = $request->descripcion;
+            $producto->image = $imagen_path;
+            $producto->categoria_id = $request->categoria;
+            $producto->save();
+        }else{
+            $producto = Producto::findOrFail($id);
+            $producto->nombre = $request->nombre;
+            $producto->codigo = $request->codigo;
+            $producto->descripcion = $request->descripcion;
+            $producto->categoria_id = $request->categoria;
+            $producto->save();
         }
-
-        $producto = Producto::findOrFail($id);
-        $producto->nombre = $request->nombre;
-        $producto->codigo = $request->codigo;
-        $producto->descripcion = $request->descripcion;
-        $producto->image = $imagen_path;
-        $producto->categoria_id = $request->categoria;
-        $producto->save();
 
         $productos = Producto::get();
         $categorias = Categoria::get();
@@ -120,7 +125,28 @@ class ProductosController extends Controller
         ]);
     }
 
+    public function mensajeProducto($id){
+        $producto = Producto::where('id', $id)->get();
+
+        return view('/Producto/mensaje-producto',[
+            'producto' => $producto,
+        ]);
+    }
+
     public function eliminarProducto($id){
+        $stocks = Stock::get();
+        foreach($stocks as $stock){
+            if($stock->producto_id == $id){
+                $stock = Stock::findOrFail($stock->id);
+                $stock->delete();
+            }
+        }
+
+        $productoImagen = Producto::where('id', $id)->get();
+        if(\Storage::disk('imagenes')->has($productoImagen[0]->image)){
+            \Storage::disk('imagenes')->delete($productoImagen[0]->image);
+        }
+
         $producto = Producto::findOrFail($id);
         $producto->delete();
 

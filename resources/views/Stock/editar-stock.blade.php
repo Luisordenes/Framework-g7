@@ -16,6 +16,8 @@
                 <th scope="col">Sucursal</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Precio</th>
+                <th scope="col">Creado</th>
+                <th scope="col">Actualizado</th>
                 <th scope="col">Editar</th>
             </tr>
         </thead>
@@ -40,6 +42,8 @@
                             @endforeach   
                             <td>{{ $stock->cantidad }}</td>
                             <td>{{ $stock->precio }}</td>
+                            <td>{{ \FormatTime::LongTimeFilterCreated($stock->created_at) }}</td>
+                            <td>{{ \FormatTime::LongTimeFilter($stock->updated_at) }}</td>
                             <td><a type="button" class="btn btn-secondary" href="/stock/editando/{{ $stock->id }}">&#9998;</a></td>
                         </tr>
             @endforeach

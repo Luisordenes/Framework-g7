@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         @foreach($productos as $producto)
-            <div class="col-3">
+            <div class="col-3 mb-2">
                 <div class="card">
                     @if(Storage::disk('imagenes')->has($producto->image))
                         <img src="{{ url('/miniatura/'.$producto->image) }}" alt="{{$producto->nombre}}">
@@ -22,12 +22,14 @@
                         <h4 class="card-title">{{$producto->nombre}}</h4>
                         <h6 class="card-title">{{$producto->codigo}}</h6>
                         <p class="card-text">{{$producto->descripcion}}</p>
+                        <p class="card-text text-muted">{{ \FormatTime::LongTimeFilterCreated($producto->created_at) }}</p>
+                        <p class="card-text text-muted">{{ \FormatTime::LongTimeFilter($producto->updated_at) }}</p>
                     </div>
                     <div class="card-footer">
                         <div class="btn-group btn-group-xs" role="group">
                             <a href="/producto/editar/{{ $producto->id }}" type="button" class="btn btn-success">Modificar</a>
                             <a href="/producto/stock/{{ $producto->id }}" type="button" class="btn btn-warning">Stock</a>
-                            <a href="/producto/eliminar/{{ $producto->id }}" type="button" class="btn btn-danger">Eliminar</a>
+                            <a href="/producto/mensaje/{{ $producto->id }}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,7 @@
         </div>
         <div class="mb-4">
             <label for="codigo" class="form-label">Codigo: </label>
-            <input type="text" class="form-control" id="codigo" name="codigo" value="{{ $producto[0]->codigo }}">
+            <input type="text" class="form-control" id="codigo" name="codigo" maxlength="10" value="{{ $producto[0]->codigo }}">
         </div>
         <div class="mb-4">
             <label for="descripcion" class="form-label">Descripción: </label>
@@ -32,7 +32,11 @@
             <select class="form-select" id="categoria" name="categoria">
                 <option selected>Seleccione una categoria</option>
                 @foreach($categorias as $categoria)
-                <option value={{ $categoria->id }}>{{ $categoria->nombre }}</option>
+                    @if($categoria->id == $producto[0]->categoria_id)
+                        <option value={{ $categoria->id }} selected>{{ $categoria->nombre }}</option>
+                    @else
+                        <option value={{ $categoria->id }}>{{ $categoria->nombre }}</option>
+                    @endif    
                 @endforeach
             </select>
         </div>

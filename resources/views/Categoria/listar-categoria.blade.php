@@ -13,12 +13,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">{{$categoria->nombre}}</h4>
+                        <p class="card-text text-muted">{{ \FormatTime::LongTimeFilterCreated($categoria->created_at) }}</p>
+                        <p class="card-text text-muted">{{ \FormatTime::LongTimeFilter($categoria->updated_at) }}</p>
                     </div>
                     <div class="card-footer">
                         <div class="btn-group btn-group-sm" role="group">
                             <a href="/categoria/editar/{{ $categoria->id }}" type="button" class="btn btn-success">Modificar</a>
                             <a href="/categoria/stock/{{ $categoria->id }}" type="button" class="btn btn-warning">Stock</a>
-                            <a href="/categoria/eliminar/{{ $categoria->id }}" type="button" class="btn btn-danger">Eliminar</a>
+                            <a href="/categoria/mensaje/{{ $categoria->id }}" type="button" class="btn btn-danger">Eliminar</a>
                         </div>
                     </div>
                 </div>

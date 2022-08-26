@@ -14,21 +14,21 @@ class InsertarSucursal extends Seeder
     {
         DB::table('sucursales')->insert(array(
             [
-                'nombre' => 'Vitacura 1',
-                'direccion' => 'Cerro colorado 5030',
+                'nombre' => 'Vitacura',
+                'direccion' => 'Alonso de cordoba 5030',
                 'comuna' => 'Vitacura',
                 'ciudad' => 'Santiago'
             ],
             [
-                'nombre' => 'Las condes 1',
+                'nombre' => 'Las condes',
                 'direccion' => 'Padre hurtado 1200',
                 'comuna' => 'Las condes',
                 'ciudad' => 'Santiago'
             ],
             [
-                'nombre' => 'Lo Barnechea 1',
-                'direccion' => 'La dehesa 5001',
-                'comuna' => 'Lo barnechea',
+                'nombre' => 'Providencia',
+                'direccion' => 'Suecia 5000',
+                'comuna' => 'Providencia',
                 'ciudad' => 'Santiago'
             ]
         ));

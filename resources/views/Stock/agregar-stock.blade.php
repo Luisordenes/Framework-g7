@@ -38,6 +38,16 @@
             <label for="precio" class="form-label">Precio: </label>
             <input type="number" class="form-control" id="precio" name="precio">
         </div>
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
      
         <button type="submit" class="btn btn-primary">Agregar</button>
 

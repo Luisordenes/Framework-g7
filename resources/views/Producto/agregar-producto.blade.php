@@ -18,7 +18,7 @@
         </div>
         <div class="mb-4">
             <label for="codigo" class="form-label">Codigo: </label>
-            <input type="text" class="form-control" id="codigo" name="codigo">
+            <input type="text" class="form-control" id="codigo" name="codigo" maxlength="10">
         </div>
         <div class="mb-4">
             <label for="descripcion" class="form-label">Descripción: </label>
