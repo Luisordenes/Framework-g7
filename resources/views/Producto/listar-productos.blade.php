@@ -11,9 +11,9 @@
     <div class="row">
         @foreach($productos as $producto)
             <div class="col-3 mb-2">
-                <div class="card">
+                <div class="card" style="height:600px;">
                     @if(Storage::disk('imagenes')->has($producto->image))
-                        <img src="{{ url('/miniatura/'.$producto->image) }}" alt="{{$producto->nombre}}">
+                        <img src="{{ url('/miniatura/'.$producto->image) }}"  alt="{{$producto->nombre}}">
                     @else
                         <img src="{{$producto->image}}" alt="{{$producto->nombre}}">
                     @endif
